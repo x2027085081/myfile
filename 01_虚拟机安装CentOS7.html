@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>虚拟机安装CentOS7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>虚拟机安装CentOS7</h1>
+<h2></h2>
+<h3>软件环境</h3>
+<p>虚拟机：VMware Workstation</p>
+<p>Linux：CentOS-7-x86_64-DVD-1708.iso镜像文件</p>
+<p>虚拟机所在电脑系统：win7</p>
+<h3>安装步骤</h3>
+<ul>
+<li>
+<p>安装VMware</p>
+<p>略</p>
+</li>
+<li>
+<p>下载Linux系统镜像文件</p>
+<p>官网地址：www.centos.org
+<img src="https://i.imgur.com/YQ9jpQB.gif" /></p>
+</li>
+<li>
+<p>VMware中安装linux系统</p>
+<ul>
+<li>
+<p>点击【文件】，选择【新建虚拟机】
+<img src="https://i.imgur.com/JFq8wsG.gif" /></p>
+</li>
+<li>
+<p>选择【自定义高级】，点击【下一步】，默认配置，然后再次点击【下一步】
+<img src="https://i.imgur.com/weSgLSg.gif" /></p>
+</li>
+<li>
+<p>安装来源，选择‘安装程序光盘镜像文件(iso)（M）’，之后，定位到之前已经下载好的镜像文件(切忌：不要出现中文路径)，然后点击【下一步】
+<img src="https://i.imgur.com/galIr4o.gif" /></p>
+</li>
+<li>
+<p>虚拟机重命名(可以默认，也可以自己起名)，然后，选择安装位置(切忌：不要出现中文)，然后点击【下一步】，然后按照默认配置选择，点击【下一步】，按照默认选择内存空间，点击【下一步】
+<img src="https://i.imgur.com/rRAjHng.gif" /></p>
+</li>
+<li>
+<p>进入网络连接，选择‘使用网络地址转换（NAT）’，点击【下一步】</p>
+</li>
+<li>进入选择控制器类型，选择‘LSI Logic’，点击【下一步】</li>
+<li>进入选择磁盘类型，选择‘SCSI’，点击【下一步】</li>
+<li>进入选择磁盘，选择‘创建新虚拟磁盘’，点击【下一步】</li>
+<li>进入设置磁盘容量大小，选择‘将虚拟磁盘拆分多个文件’，点击【下一步】</li>
+<li>进入磁盘文件命名，默认即可，点击【下一步】，然后点击【完成】	
+<img src="https://i.imgur.com/ILE8Wfp.gif" /></li>
+</ul>
+</li>
+<li>
+<p>在虚拟机上配置linux系统</p>
+<ul>
+<li>启动虚拟机后，选择‘Install CentOS 7’，然后点击键盘【Enter】回车键,根据提示，再次点击【Enter】回车键
+<img src="https://i.imgur.com/G4lpLbc.gif" /></li>
+<li>等待系统自行操作(大概2分钟)，之后会出现选择安装语言界面，选择‘中文’、‘简体中文’，点击【继续】按钮</li>
+<li>选择‘安装位置’，默认即可，点击左上角【完成】</li>
+<li>然后点击【开始安装】</li>
+<li>安装过程界面中，选择‘ROOT密码’设置，点击【完成】，其次选择‘创建用户’进行设置，点击【完成】</li>
+<li>
+<p>等待系统安装(大概5-10分钟左右)，完成之后，点击【重启】
+<img src="https://i.imgur.com/lpXGos1.gif" /></p>
+</li>
+<li>
+<p>输入之前设置的用户名和密码，即可登录成功
+<img src="https://i.imgur.com/ChZndYC.gif" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>配置系统网络环境</p>
+<ul>
+<li>
+<p>点击虚拟机左侧，选中安装的系统，右键，设置，查看网络连接信息,【硬件】页签，选择【网络适配器】，网络连接选择【NAT...】，点击【确定】按钮
+<img src="https://i.imgur.com/r1kCnlA.gif" /></p>
+</li>
+<li>
+<p>在虚拟机中，选中安装的系统，点击工具条中的【编辑】-选择【虚拟网络编辑器】</p>
+</li>
+<li>选中【VMnet8】，点击【NAT设置】，查看本地IP网段</li>
+<li>
+<p>点击【DHCP设置】，查看IP起始段，方便设置IP地址
+<img src="https://i.imgur.com/1FY2Yto.gif" /></p>
+</li>
+<li>
+<p>进入命令窗口，切换到root的根目录，输入命令：vi /etc/sysconfig/network-scripts/ifcfg-ens33 
+<img src="https://i.imgur.com/0OUHzNq.gif" /></p>
+</li>
+<li>
+<p>点击键盘【i】键，修改并增加如下内容信息，完成之后，点击键盘【Esc】键，输入【:wq!】,点击回车键，保存退出
+<img src="https://i.imgur.com/G1k0K68.gif" /></p>
+<pre><code>TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33
+UUID=默认即可
+DEVICE=ens33
+ONBOOT=yes
+IPADDR=192.168.168.226
+GATEWAY=192.168.168.2
+NETMASK=255.255.255.0
+DNS1=114.114.114.114
+</code></pre>
+
+</li>
+<li>
+<p>输入命令，使配置有效service network restart
+<img src="https://i.imgur.com/C5zMDLp.png" /></p>
+</li>
+<li>
+<p>配置完毕后，查询IP信息，并确认是否网络畅通</p>
+</li>
+<li>ping 192.168.168.1</li>
+<li>ping 192.168.168.2</li>
+<li>ping www.baidu.com</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/raL9lQl.png" /></p>
+<h4>至此，安装完成</h4>
+<hr />
+<h3>更多技术热点，资讯，请关注微信公众号【码神联盟】</h3>
+<p><img src="https://i.imgur.com/XPT69pH.jpg" /></p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
